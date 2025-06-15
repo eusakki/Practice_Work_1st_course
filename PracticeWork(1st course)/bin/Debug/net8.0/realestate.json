@@ -1,0 +1,37 @@
+[
+  {
+    "Type": 0,
+    "Price": 100000,
+    "Sold": true
+  },
+  {
+    "Type": 1,
+    "Price": 300000,
+    "Sold": false
+  },
+  {
+    "Type": 0,
+    "Price": 350000,
+    "Sold": false
+  },
+  {
+    "Type": 1,
+    "Price": 400000,
+    "Sold": true
+  },
+  {
+    "Type": 3,
+    "Price": 1000000,
+    "Sold": false
+  },
+  {
+    "Type": 0,
+    "Price": 250000,
+    "Sold": false
+  },
+  {
+    "Type": 0,
+    "Price": 150000,
+    "Sold": false
+  }
+]
