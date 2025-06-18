@@ -6,16 +6,21 @@ string filePath = "realestate.json";
 bool exit = false;
 while (!exit)
 {
+    Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine("1. Add item");
     Console.WriteLine("2. Remove item");
     Console.WriteLine("3. Print list");
     Console.WriteLine("4. Print from end");
     Console.WriteLine("5. Sort by price descending");
     Console.WriteLine("6. Search unsold apartments between 200000-500000");
-    Console.WriteLine("7. Serialize");
-    Console.WriteLine("8. Deserialize");
-    Console.WriteLine("9. Exit");
+    Console.WriteLine("7. Edit element by index");
+    Console.WriteLine("8. Save to file");
+    Console.WriteLine("9. Load from file");
+    Console.WriteLine("0. Exit");
+    Console.ResetColor();
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.Write("Choose option: ");
+    Console.ResetColor();
 
     switch (Console.ReadLine())
     {
@@ -51,23 +56,44 @@ while (!exit)
             Console.WriteLine("Sorted!");
             break;
 
+        case "7":
+            Console.Write("Enter index to change element: ");
+            int indexSet = int.Parse(Console.ReadLine());
+            Console.Write("Enter new property type(Apartment, House, Commercial, Land): ");
+            var newType = Enum.Parse<PropertyType>(Console.ReadLine()!);
+            Console.Write("Enter new property price: ");
+            var newPrice = double.Parse(Console.ReadLine());
+            Console.Write("Is sold? (true/false): ");
+            var newSold = bool.Parse(Console.ReadLine()!);
+
+            try
+            {
+                list[indexSet] = new RealEstate(newType, newPrice, newSold);
+                Console.WriteLine("Element has changed.");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("Incorrect index!");
+            }
+            break;
+
         case "6":
             var found = list.Search();
             foreach (var item in found)
                 Console.WriteLine(item);
             break;
 
-        case "7":
-            list.Serialize(filePath);
-            Console.WriteLine("Serialized to file.");
-            break;
-
         case "8":
-            list.Deserialize(filePath);
-            Console.WriteLine("Deserialized from file.");
+            list.Serialize(filePath);
+            Console.WriteLine("Saved to file.");
             break;
 
         case "9":
+            list.Deserialize(filePath);
+            Console.WriteLine("Loaded  from file.");
+            break;
+
+        case "0":
             exit = true;
             break;
 
